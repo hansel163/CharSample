@@ -4,11 +4,11 @@
 
 [Version]
 Signature="$WINDOWS NT$"
-Class=Sample ; TODO: edit Class
+Class=WDFSample ; TODO: edit Class
 ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
 Provider=%ManufacturerName%
 CatalogFile=CharSample.cat
-DriverVer= ; TODO: set DriverVer in stampinf property pages
+DriverVer= 03/25/2018,1.0.0000.0325; TODO: set DriverVer in stampinf property pages
 
 [DestinationDirs]
 DefaultDestDir = 12
@@ -79,8 +79,8 @@ KmdfLibraryVersion = $KMDFVERSION$
 
 [Strings]
 SPSVCINST_ASSOCSERVICE= 0x00000002
-ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
-ClassName="Samples" ; TODO: edit ClassName
+ManufacturerName="Hansel" ;TODO: Replace with your manufacturer name
+ClassName="WDFSamples" ; TODO: edit ClassName
 DiskName = "CharSample Installation Disk"
 CharSample.DeviceDesc = "CharSample Device"
 CharSample.SVCDESC = "CharSample Service"
