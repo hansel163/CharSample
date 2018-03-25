@@ -7,14 +7,15 @@
 
 NTSTATUS
 CharSample_EvtDeviceAdd(
-    IN WDFDRIVER       Driver,
-    IN PWDFDEVICE_INIT DeviceInit
+	_In_    WDFDRIVER       Driver,
+	_Inout_ PWDFDEVICE_INIT DeviceInit
     )
 {
     NTSTATUS			status;
     WDFDEVICE			device;
     WDF_IO_QUEUE_CONFIG	ioQueueConfig;
 
+	UNREFERENCED_PARAMETER(Driver);
 	//例程的首句PAGED_CODE，表示该例程的代码占用分页内存。
 	//只能在PASSIVE_LEVEL中断级别调用该例程，否则会蓝屏。
 	//如不说明，则占用系统的非分页内存，要珍惜使用。

@@ -8,29 +8,12 @@
 
 #include "public.h"
 
-#ifndef _H
-#define _H
+EXTERN_C_START
 
-NTSTATUS
-DriverEntry(
-    IN PDRIVER_OBJECT  DriverObject,
-    IN PUNICODE_STRING RegistryPath
-    );
+DRIVER_INITIALIZE DriverEntry;
+EVT_WDF_DRIVER_DEVICE_ADD CharSample_EvtDeviceAdd;
 
-NTSTATUS
-CharSample_EvtDeviceAdd(
-    IN WDFDRIVER       Driver,
-    IN PWDFDEVICE_INIT DeviceInit
-    );
+EVT_WDF_IO_QUEUE_IO_DEVICE_CONTROL CharSample_EvtIoDeviceControl;
 
-VOID
-CharSample_EvtIoDeviceControl(
-    IN WDFQUEUE   Queue,
-    IN WDFREQUEST Request,
-    IN size_t     OutputBufferLength,
-    IN size_t     InputBufferLength,
-    IN ULONG      IoControlCode
-    );
-
-#endif
+EXTERN_C_END
 

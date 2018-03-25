@@ -1,4 +1,4 @@
-// Test_CharSample.cpp : Defines the entry point for the console application.
+// CharSampleTest.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -12,14 +12,14 @@
 
 #include "public.h"
 
-PCHAR
+LPCWCHAR
 GetDevicePath(
     IN  LPGUID InterfaceGuid
     );
 
 int main(int argc, char* argv[])
 {
-	PCHAR  DevicePath;
+	LPCWCHAR  DevicePath;
     HANDLE hDevice = INVALID_HANDLE_VALUE;
 
 	printf("Application Test_CharSample starting...\n");
@@ -38,14 +38,14 @@ int main(int argc, char* argv[])
 		printf("ERROR opening device: (%0x) returned from CreateFile\n", GetLastError());
         return 0;
     }
-
+	  
 	printf("OK.\n");
 
 	CHAR	bufInput[1];	// Input to device
 	CHAR	bufOutput[2];	// Output from device
 	ULONG	nOutput;	// Count written to bufOutput
 
-	printf("«Î ‰»Î ˝◊÷(0-9)\n"); 
+	printf("Input a number?(0-9)\n"); 
 l0:	bufInput[0] = _getch();
 	if ((bufInput[0]<'0') || (bufInput[0]>'9')) goto l0;
 	_putch(bufInput[0]);
@@ -77,7 +77,7 @@ exit:
 	return 0;
 }
 
-PCHAR
+LPCWCHAR
 GetDevicePath(
     IN  LPGUID InterfaceGuid
     )

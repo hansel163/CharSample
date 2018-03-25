@@ -7,17 +7,18 @@
 
 VOID
 CharSample_EvtIoDeviceControl(
-    IN WDFQUEUE   Queue,
-    IN WDFREQUEST Request,
-    IN size_t     OutputBufferLength,
-    IN size_t     InputBufferLength,
-    IN ULONG      IoControlCode
+	_In_ WDFQUEUE   Queue,
+	_In_ WDFREQUEST Request,
+	_In_ size_t     OutputBufferLength,
+	_In_ size_t     InputBufferLength,
+	_In_ ULONG      IoControlCode
     )
 {
     NTSTATUS  status;
     PVOID	  buffer;
 	CHAR	  n,c[]="零一二三四五六七八九";
 
+	UNREFERENCED_PARAMETER(Queue);
     PAGED_CODE();
 
     switch(IoControlCode) {
