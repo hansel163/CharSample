@@ -56,7 +56,7 @@ l0:	bufInput[0] = _getch();
 						 bufInput,
 						 1,
 						 bufOutput,
-						 2,
+						 1,
 						 &nOutput,
 						 NULL)
 	   )
@@ -66,7 +66,6 @@ l0:	bufInput[0] = _getch();
 	}
 	printf(":"); 
 	_putch(bufOutput[0]); 
-	_putch(bufOutput[1]); 
 	printf("\n");
 	
 exit:

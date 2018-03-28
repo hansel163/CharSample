@@ -16,7 +16,7 @@ CharSample_EvtIoDeviceControl(
 {
     NTSTATUS  status;
     PVOID	  buffer;
-	CHAR	  n,c[]="零一二三四五六七八九";
+	CHAR	  n,c[]="abcdefghij";
 
 	UNREFERENCED_PARAMETER(Queue);
     PAGED_CODE();
@@ -24,7 +24,7 @@ CharSample_EvtIoDeviceControl(
     switch(IoControlCode) {
 
     case CharSample_IOCTL_800:
-		if (InputBufferLength  == 0 || OutputBufferLength < 2)
+		if (InputBufferLength  == 0 || OutputBufferLength < 1)
 		{	//检查输入、输出参数有效性
 			WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
 		}
@@ -49,18 +49,18 @@ CharSample_EvtIoDeviceControl(
 				n-='0';	//n=数字(0-9)
 
 				//获取输出缓冲区地址buffer
-				status = WdfRequestRetrieveOutputBuffer(Request, 2, &buffer, NULL);
+				status = WdfRequestRetrieveOutputBuffer(Request, 1, &buffer, NULL);
 				if (!NT_SUCCESS(status)) {
 					WdfRequestComplete(Request, STATUS_UNSUCCESSFUL);
 					break;
 				}
 
 				//这里buffer表示输出缓冲区地址
-				//输出：从中文数组c[]中取出对应的数字的中文码，拷贝到输出缓冲区
-				strncpy((PCHAR)buffer,&c[n*2],2);
+				//输出：从数组c[]中取出对应的数字的字母，拷贝到输出缓冲区
+				strncpy((PCHAR)buffer,&c[n],1);
 
-				//完成I/O请求，驱动程序传给应用程序的数据长度为2字节（一个中文）
-				WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, 2);
+				//完成I/O请求，驱动程序传给应用程序的数据长度为1字节
+				WdfRequestCompleteWithInformation(Request, STATUS_SUCCESS, 1);
 			}
 			else //否则返回无效参数
 				WdfRequestComplete(Request, STATUS_INVALID_PARAMETER);
