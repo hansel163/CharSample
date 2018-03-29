@@ -124,6 +124,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
+    <Inf2CatUseLocalTime>true</Inf2CatUseLocalTime>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
@@ -155,6 +156,15 @@
     <ClInclude Include="private.h" />
     <ClInclude Include="public.h" />
     <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <MessageCompile Include="CharSample-ETW.man">
+      <GenerateKernelModeLoggingMacros Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateKernelModeLoggingMacros>
+      <UseBaseNameOfInput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</UseBaseNameOfInput>
+    </MessageCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CharSample-ETW.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,6 +3,8 @@
 
 #ifdef ALLOC_PRAGMA
 #pragma alloc_text(INIT, DriverEntry)
+#pragma alloc_text (PAGE, CharSample_EvtDeviceAdd)
+#pragma alloc_text (PAGE, CharSample_EvtDriverContextCleanup)
 #endif
 
 NTSTATUS
@@ -37,6 +39,7 @@ Return Value:
 {
     WDF_DRIVER_CONFIG  config;
     NTSTATUS		   status;
+	WDF_OBJECT_ATTRIBUTES attributes;
 
     //
     // Initiialize driver config to control the attributes that
@@ -48,7 +51,15 @@ Return Value:
     // initialize most commonly used members.
     //
 
+	KdPrint(("EventDrv: " __FUNCTION__ "\n"));
+
     WDF_DRIVER_CONFIG_INIT(&config, CharSample_EvtDeviceAdd);
+
+    // Register a cleanup callback so that we can call WPP_CLEANUP when
+    // the framework driver object is deleted during driver unload.
+    //
+    WDF_OBJECT_ATTRIBUTES_INIT(&attributes);
+    attributes.EvtCleanupCallback = CharSample_EvtDriverContextCleanup;
 
     //
     // Create a framework driver object to represent our driver.
@@ -56,13 +67,53 @@ Return Value:
     status = WdfDriverCreate(
         DriverObject,
         RegistryPath,
-        WDF_NO_OBJECT_ATTRIBUTES,	// Driver Attributes
+		&attributes,					// Driver Attributes
         &config,					// Driver Config Info
         WDF_NO_HANDLE				// hDriver
         );
 
+	// Register ETW
+	EventRegisterFunction_Entry_Exit_Provider();
+	EventWriteFunctionEntry(NULL, __FUNCTION__ , 2);
+
+	EventWriteFuntionExit(NULL, __FUNCTION__, 2);
+
     return status;
 }
 
+//_Use_decl_annotations_
+//VOID
+//MyUnload(
+//	struct _DRIVER_OBJECT  *DriverObject
+//)
+//{
+//	// Function body
+//}
 
 
+VOID
+CharSample_EvtDriverContextCleanup(
+	_In_ WDFOBJECT DriverObject
+)
+/*++
+Routine Description:
+
+Free all the resources allocated in DriverEntry.
+
+Arguments:
+
+DriverObject - handle to a WDF Driver object.
+
+Return Value:
+
+VOID.
+
+--*/
+{
+	UNREFERENCED_PARAMETER(DriverObject);
+
+	PAGED_CODE();
+
+	// Unregister ETW
+	EventUnregisterFunction_Entry_Exit_Provider();
+}

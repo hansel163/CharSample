@@ -45,4 +45,14 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <MessageCompile Include="CharSample-ETW.man">
+      <Filter>Resource Files</Filter>
+    </MessageCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CharSample-ETW.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
 </Project>

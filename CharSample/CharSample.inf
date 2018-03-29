@@ -8,7 +8,7 @@ Class=WDFSample ; TODO: edit Class
 ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
 Provider=%ManufacturerName%
 CatalogFile=CharSample.cat
-DriverVer= 03/25/2018,1.0.0000.0325; TODO: set DriverVer in stampinf property pages
+DriverVer= ; TODO: set DriverVer in stampinf property pages
 
 [DestinationDirs]
 DefaultDestDir = 12

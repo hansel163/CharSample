@@ -7,11 +7,15 @@
 #include <wdf.h>
 
 #include "public.h"
+#include "CharSample-ETW.h"  /* ETW header file */
 
 EXTERN_C_START
 
 DRIVER_INITIALIZE DriverEntry;
 EVT_WDF_DRIVER_DEVICE_ADD CharSample_EvtDeviceAdd;
+//DRIVER_UNLOAD MyUnload;
+EVT_WDF_OBJECT_CONTEXT_CLEANUP CharSample_EvtDriverContextCleanup;
+
 
 EVT_WDF_IO_QUEUE_IO_DEVICE_CONTROL CharSample_EvtIoDeviceControl;
 
