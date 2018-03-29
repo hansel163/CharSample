@@ -51,7 +51,7 @@ Return Value:
     // initialize most commonly used members.
     //
 
-	KdPrint(("EventDrv: " __FUNCTION__ "\n"));
+	KdPrint(("CharSample: " __FUNCTION__ " Enter\n"));
 
     WDF_DRIVER_CONFIG_INIT(&config, CharSample_EvtDeviceAdd);
 
@@ -77,7 +77,7 @@ Return Value:
 	EventWriteFunctionEntry(NULL, __FUNCTION__ , 2);
 
 	EventWriteFuntionExit(NULL, __FUNCTION__, 2);
-
+	KdPrint(("CharSample: " __FUNCTION__ " Exit\n"));
     return status;
 }
 
